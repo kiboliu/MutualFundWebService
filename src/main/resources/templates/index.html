@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="css/bootstrap.css">
+<title>Welcome Page</title>
+</head>
+<body style="background:linear-gradient(to right, rgb(103,173,76), #117ACA);">
+<div class="container">
+	<div style="height:100px">
+	</div>
+	<div style="background-color:white;width:90%;margin-right:auto;margin-left:auto;border-radius:10px">
+		<br>
+		<div class="panel panel-info" style="margin-left:2em;width:95%">
+		  	<div class="panel-heading">
+		    	<p class="panel-title" style="font-size:15px">Enter your User ID and Password</p>
+		  	</div>
+			<h4 th:text="${errorMsg}"></h4>
+		  	<div class="panel-body" align=center>
+		  	<form th:action="@{~/index}" method="post">
+		  		<table>
+		  			<tr>
+			    		<th>User Name:</th>
+			    		<th><input type="text" id="username" name="username"/></th>
+			    	</tr>
+			    	<tr>
+		    			<th>Password:</th>
+		    			<th><input type="password" id="password" name="password"/></th>
+		    		</tr>
+		    	</table>
+		    	<br>
+		    	<br>
+		    	<button type="submit" class="btn btn-info">Sign In</button>
+		    </form>
+		  	</div>
+		  	<br>
+		</div>
+		<div class="container:fluid" style="background-color:rgb(245,245,245);border-radius:10px">
+			<br>
+			<div style="text-align:center">
+				<ul style="list-style:none">
+					<li>© Copyright 2018. Delta Consulting, Inc. All Rights Reserved.</li>
+				</ul>
+			</div>
+			<br>
+			<br>
+		</div>
+	</div>
+</div>
+</body>
+</html>

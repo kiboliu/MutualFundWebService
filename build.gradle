@@ -1,0 +1,40 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.9.RELEASE'
+		ext['thymeleaf.version'] = '3.0.3.RELEASE'
+		ext['thymeleaf-layout-dialect.version'] = '2.2.0'
+		ext['hibernate.version'] = '5.2.8.Final'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+group = 'com.DeltaMutualFund'
+version = '1.0.0'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('mysql:mysql-connector-java:6.0.5')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4:3.0.2.RELEASE')
+	compile('org.apache.commons:commons-lang3:3.5')
+	compile('org.hibernate:hibernate-core:5.2.12.Final')
+	compile('com.googlecode.json-simple:json-simple:1.1.1')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}

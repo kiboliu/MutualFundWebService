@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="~{fragments/EmployeeHeader :: header}"></div>
+	<div class="container-fluid" align=center>
+		<br>
+		<p style="margin-top:2%;font-size:20px;display:inline;" th:text="${employeeModel.title}"></p>
+		<a style="float:right" href="/employees/CreateEmployeeAccount.html" 
+		th:href="@{~/employee/CreateEmployee}">Create Employee Accounts</a>
+		<br>
+		<br>
+		<div style="width:980px;background-color:white;border-top:solid;border-color:#117ACA;
+		margin-right: auto; margin-left: auto;">
+		<br>
+			<div class="table-responsive">
+			<table class="table table-bordered table-hover">
+			<thead>
+				<tr style="background-color:rgb(72,83,93);color:white">
+					<th>Employee Name</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Password</th>
+					<th>&#32;&#32;&#32;&#32;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${employeeModel.EmployeeList.size()} eq 0">
+					<td colspan="2">No employees.</td>
+				</tr>
+				<tr th:each="employee: ${employeeModel.EmployeeList}">
+					<td th:text="${employee.username}"></td>
+					<td th:text="${employee.firstname}"></td>
+					<td th:text="${employee.lastname}"></td>
+					<td th:text="······"></td>
+					<td>
+					<a href="/employees/ChangeEmployeePassword.html" th:href="@{'/employee/ChangeEmployeePassword/'+${employee.username}}" th:text="Edit"></a>
+					</td> 
+				</tr>			
+			</tbody>
+			</table>
+		  </div>
+		</div>
+	</div>
+	<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      th:fragment="header">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../css/font-awesome.css">
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <title>Mutual Fund</title>
+</head>
+<body>
+    <!-- Big Head -->
+    <div class="container-fluid">
+        <!-- <div class="row" style="background:url('../../img/bg.jpg');height:160px;
+        background-position: center;background-size:cover;background-repeat:no-repeat;"> -->
+        
+        <div class="row" th:style="'background:url(' + @{/img/bg.jpg} + ');height:160px;
+		background-position: center;background-size:cover;background-repeat:no-repeat;'" 
+		style="height:160px;background-image:url(../../img/bg.jpg);
+		background-position: center;background-size:cover;background-repeat:no-repeat;">
+            <div sec:authorize="isAuthenticated()" class="col-md-12" style="float:right;padding-top:112px">
+                <ul class="nav nav-pills" style="float:right">
+                    <li>Hi, <span sec:authentication="name"></span></h4></li>
+                    <li class="active" style="background-color:transparent;">
+                        <form th:action="@{~/logout}" method="post">
+                            <input class="btn" type="submit" value="Sign Off" />
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <div class="container-fluid">
+        <ul class="nav nav-tabs">
+            <li><a th:href="@{~/user}">My Account</a></li>
+            <li><a th:href="@{~/user/buy}">Buy Fund</a></li>
+            <li><a th:href="@{~/user/sell}">Sell Fund</a></li>
+            <li><a th:href="@{~/user/transaction}">Transation History</a></li>
+            <li><a th:href="@{~/user/check}">Request Check</a></li>
+            <li><a th:href="@{~/user/research}">Fund Research</a></li>
+        </ul>
+    </div>
+</body>
+</html>

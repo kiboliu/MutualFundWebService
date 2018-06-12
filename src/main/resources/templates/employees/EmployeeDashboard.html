@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="~{fragments/EmployeeHeader :: header}"></div>
+	<div class="container" align=center>
+		<p style="margin-top:2%;font-size:20px" th:text="${employeeModel.title}"></p>
+		<div style="width:750px;background-color:white;border-top:solid;border-color:#117ACA;
+		margin-right: auto; margin-left: auto;">
+		
+			<div class="row" style="margin-top: 15px;">
+				<div class="col-lg-6 col-md-12">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-3" style="color: white;">
+									<i class="fa fa-credit-card fa-5x"></i>
+								</div>
+							</div>
+						</div>
+						<a href="/employees/CreateFund.html" th:href="@{~/employee/CreateFund}">
+							<div class="panel-footer">
+								<span class="pull-left">Fund Management</span> <span
+									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+								<div class="clearfix"></div>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-12">
+                    <div class="panel panel-green" style="background:rgb(81,175,78)">
+                        <div class="panel-heading">
+                        		<div class="row">
+								<div class="col-xs-3" style="color: white;">
+									<i class="fa fa-money fa-5x"></i>
+								</div>
+							</div>
+						</div>
+                        <a href="/employees/DepositCheck.html" th:href="@{~/employee/DepositCheck}">
+                            <div class="panel-footer" style="color:rgb(81,175,78)">
+                                <span class="pull-left">Deposit Check</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>             
+			</div>
+
+			<div class="row" style="margin-top: 15px;">
+				<div class="col-lg-6 col-md-12">
+					<div class="panel panel-yellow" style="background:rgb(236, 174, 95);">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-3" style="color:white;">
+									<i class="fa fa-address-card-o fa-5x"></i>
+								</div>
+							</div>
+						</div>
+						<a href="/employees/ViewCustomer.html" th:href="@{~/employee/ViewCustomer}">
+							<div class="panel-footer" style="color:rgb(236, 174, 95);">
+								<span class="pull-left">Manage Customer Account</span> <span
+									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+								<div class="clearfix"></div>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-12">
+					<div class="panel panel-red" style="background:rgb(206, 60, 62);">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-3" style="color: white;">
+									<i class="fa fa-user-plus fa-5x"></i>
+								</div>
+							</div>
+						</div>
+						<a href="/employees/ViewEmployee.html" th:href="@{~/employee/ViewEmployee}">
+							<div class="panel-footer" style="color:rgb(206, 60, 62)">
+								<span class="pull-left">Manage Employee Account</span> <span
+									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+								<div class="clearfix"></div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="panel panel-purple" style="background:rgb(150,78,252);">
+                        <div class="panel-heading">
+                        		<div class="row">
+								<div class="col-xs-3" style="color: white">
+									<i class="fa fa-user-circle-o fa-5x"></i>
+								</div>
+							</div>
+						</div>
+                        <a href="/employees/TransitionDay.html" th:href="@{~/employee/TransitionDay}">
+                            <div class="panel-footer" style="color:rgb(150,78,252);">
+                                <span class="pull-left">Simulate Transition Date</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+			 </div> 
+		</div>		
+	</div>
+	
+	<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

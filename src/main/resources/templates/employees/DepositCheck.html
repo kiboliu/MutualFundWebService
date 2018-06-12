@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="UTF-8">
+	<script src="../../static/js/cleave.min.js" th:src="@{/js/cleave.min.js}"></script>
+</head>
+<body>
+	<div th:replace="~{fragments/EmployeeHeader :: header}"></div>
+	<div class="container-fluid" align=center>
+		<p style="margin-top:2%;font-size:20px">Deposit Check for Customers</p>
+		<div style="width:650px;background-color:white;border-top:solid;border-color:#117ACA;
+		margin-right: auto; margin-left: auto;">
+		
+			
+		<div th:each="error : ${transModel.errorMsg}">
+		<p style="font-size:20px;color:red;" align=center th:text="${error}"></p>
+		</div>
+			<div class="form-group">
+				<form action="/employee/DepositCheck" 
+				th:action="@{/employee/DepositCheck}" method="POST" th:object="${transModel.check}">
+				<br>
+				<p>
+					* Check Amount should be greater than $1.00 & less than $1,000,000.00<br/>
+				</p>
+				<span style="font-size:18px;padding-top:5%">Customer Username: </span>
+				<input type="text" name="username" id="username" th:value="*{username}"/>
+				<br>
+				<br>
+				<span style="font-size:18px;padding-top:5%">Deposit Amount: </span>
+				<span class="dollar">$<input class="input-numeral" type="text" name="amount" id="amount" 
+				th:value="*{amount}" placeholder="0.00"/></span>
+				<script th:inline="javascript">
+						var cleaveNumeral = new Cleave('.input-numeral', {
+							numeral: true,
+						    numeralThousandsGroupStyle: 'thousand'
+						});
+				</script>
+				<br>
+				<br>
+				<input class="btn btn-primary" type="submit" value="Submit" style="width:15%">
+				</form>
+			</div>
+			<p style="margin-top:2%;font-size:20px;">
+			Current List of Customers
+			</p>
+			<div class="table-responsive">
+				<table class="table table-bordered table-hover text-right">
+					<tr style="background-color: rgb(72, 83, 93); color: white" class="text-center">
+						<th>Username</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Cash</th>
+						<th>Available Balance</th>
+					</tr>
+					<tr th:if="${transModel.customerList.size()} eq 0">
+						<td colspan="3">There is no customer right now!</td>
+					</tr>
+					<tr th:each="customer : ${transModel.customerList}">
+						<td th:text="${customer.username}">user</td>
+						<td th:text="${customer.firstname}"></td>
+						<td th:text="${customer.lastname}"></td>
+						<td th:text="${customer.cash} ? ${#numbers.formatDecimal(customer.cash, 1, 'COMMA', 2, 'POINT')} : ' '"></td>
+						<td th:text="${customer.availablebalance} ? ${#numbers.formatDecimal(customer.availablebalance, 1, 'COMMA', 2, 'POINT')} : ' '"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

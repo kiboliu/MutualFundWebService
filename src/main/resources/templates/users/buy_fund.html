@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="../../css/bootstrap.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="../../js/bootstrap.min.js"></script>
+	<title>Buy Fund</title>
+	<script type="text/javascript">
+		$(document).on('change', '#amount', function() {
+            var val = parseFloat($("#amount").val()).toFixed(2);
+		    $("#amount").val(val);
+		})
+	</script>
+</head>
+<body>
+	<div th:replace="~{fragments/CustomerHeader :: header}"></div>
+
+	<!-- Main Part -->
+	<br/>
+	<br/>
+	<div class="container-fluid" align=center>
+		<p style="margin-left:-55%;font-size:20px"><span class="caret"></span> BUY FUNDS</p>
+		<form th:action="@{~/user/buy}" method="post">
+		<div style="width:800px;background-color:white;border-top:solid;border-color:#117ACA">
+			<!-- Step 1 -->
+			<span style="margin-left:-83%;font-size:18px;padding-top:10px">1. Choose a Fund</span>
+			<select name="fund" id="fund" class="form-control">
+				<option th:each="fund : ${model.fundlist}" th:value="${fund.name}" th:text="${fund.name}">eBizEducation</option>
+			</select>
+			<!-- Step 2 -->
+			<span style="margin-left:-81%;font-size:18px;padding-top:10px">2. Amount($) to buy</span>
+			<input id="amount" name="amount" type="number" step="0.01" class="form-control" precision="2"/>
+			<span th:each="err : ${model.error}">
+				<p style="color:red" th:text="${err}"></p>
+			</span>
+			<span>Cash Balance: $<span th:text="${#numbers.formatDecimal(model.cash, 1, 'COMMA', 2, 'POINT')}"></span><br/>Available Balance: $<span th:text="${model.available} ? ${#numbers.formatDecimal(model.available, 0, 'COMMA', 2, 'POINT')} : '0.00'"></span></span>
+			<p>* Note: your amount to buy should be less than your available balance.</p>
+			<br/>
+			<br/>
+			<button class="btn btn-primary" type="button" style="float:right;width:15%" data-toggle="modal" data-target="#myModal">Buy</button>
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+    				<div class="modal-content">
+        				<div class="modal-header">
+            				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            				<h4 class="modal-title" id="myModalLabel">Buy Fund</h4>
+        				</div>
+        				<div class="modal-body">
+							<h4>Are you sure to buy this fund?</h4>
+        				</div>
+        				<div class="modal-footer">
+            				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+           					<button type="submit" class="btn btn-primary">Submit</button>
+        				</div>
+    				</div><!-- /.modal-content -->
+				</div><!-- /.modal -->
+			</div>
+			<br>				
+			<br>
+		</div>
+		</form>
+	</div>
+
+	<!-- foot -->
+	<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

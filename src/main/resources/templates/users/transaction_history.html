@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="../../static/js/cleave.min.js"></script>
+	<title>Transaction History</title>
+	<script type="text/javascript">
+		$(document).on('keyup', '#amount', function() {
+			console.log("lalalaa");
+		    var cur = parseInt($("#amount").val()),
+		        max = parseInt($("#amount").attr("max")),
+		        min = parseInt($("#amount").attr("min"));
+		    if (cur > max) {
+		        $("#amount").val(max);
+		    };
+		    if (cur < min) {
+		        $("#amount").val(min);
+		    }
+		})
+	</script>
+</head>
+<body>
+	<div th:replace="~{fragments/CustomerHeader :: header}"></div>
+
+	<!-- Main Part -->
+	<div class="container-fluid">
+		<p style="font-size:20px"><span class="caret"></span> TRANSACTION HISTORY</p>
+		<!-- Transaction Table -->
+		<div class="table-responsive text-right">
+			<table class="table table-bordered table-hover text-right">
+				<tr style="background-color:rgb(72,83,93);color:white">
+					<th class="text-right">Fund</th>
+					<th class="text-right">Amount($)</th>
+					<th class="text-right">Shares(#)</th>
+					<th class="text-right">Type</th>
+					<th class="text-right">Date</th>
+					<th class="text-right">Status</th>
+				</tr>
+				<tr th:each="transaction : ${model.transactions}" class="text-right">
+					<th th:text="${transaction.fund_name}" class="text-right" ></th>
+					<th th:text="${transaction.amount != 0.0} ? ${#numbers.formatDecimal(transaction.amount, 1, 'COMMA', 2, 'POINT')} : ' '" class="text-right"></th>
+					<th th:text="${transaction.shares != 0.0} ? ${#numbers.formatDecimal(transaction.shares, 1, 'COMMA', 3, 'POINT')}  : ' '" class="text-right"></th>
+					<th th:text="${transaction.transactiontype}" class="text-right"></th>
+					<th th:text="${transaction.exe_date != null} ? ${transaction.exe_date} : ' '" class="text-right"></th>
+					<th th:text="${transaction.status}" class="text-right"></th>
+				</tr>
+				<!-- </c:forEach> -->
+			</table>
+		  </div>
+	</div>
+
+	<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

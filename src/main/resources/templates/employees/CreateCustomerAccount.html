@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="~{fragments/EmployeeHeader :: header}"></div>
+	<div class="container">
+		<p style="margin-top:2%; font-size:20px; " align=center th:text="${employeeModel.title}"></p>
+		<div style="width:750px;background-color:white;border-top:solid;border-color:#117ACA;
+		margin-right: auto; margin-left: auto;">
+		<!-- <p style="font-size:20px;color:red;" align=center th:text="${employeeModel.errorMsg}"></p> -->  
+		<th:block th:each="error : ${employeeModel.cusErrorList}">
+        		<p style="font-size:16px;color:red;" align=center th:text="${error}"></p>
+        </th:block> 
+		<div class="createaccount"
+		style="width: 80%; margin-left: auto; margin-right: auto; align:center;">
+		<div class="form-group">
+			<!-- <form action="/employee/CreateEmployeeAccount" th:action="@{/employee/CreateEmployeeAccount}" method="post" th:object="${employeeModel.newEmployee}"> -->
+			<form action="/employee/CreateCustomer" th:action="@{/employee/CreateCustomer}" method="post" th:object="${employeeModel.newCustomer}">										
+					<input type="hidden" name="id" th:value="*{id}">
+					<label for="username" style="font-size: 18px; padding-top: 10px">
+					User Name</label> <span style="color:red; font-size:12px;">*Required</span> <input type="text" name="username" class="form-control" th:value="*{username}"/>
+					<label for="password" style="font-size: 18px; padding-top: 10px">
+					Password</label> <span style="color:red; font-size:12px;">*Required</span> <input type="password" name="password" class="form-control" th:value="*{password}"/> 
+					<label for="firstname" style="font-size: 18px; padding-top: 10px">
+					First Name</label> <span style="color:red; font-size:12px;">*Required</span> <input type="text" name="firstname" class="form-control" th:value="*{firstname}"/> 
+					<label for="lastname" style="font-size: 18px; padding-top: 10px">
+					Last Name</label> <span style="color:red; font-size:12px;">*Required</span> <input type="text" name="lastname" class="form-control" th:value="*{lastname}"/> 
+					<label for="addr_line1" style="font-size: 18px; padding-top: 10px">
+					Address(Line 1)</label> <span style="color:red; font-size:12px;">*Required</span> <input type="text" name="addr_line1" class="form-control" th:value="*{addr_line1}"/> 
+					<label for="addr_line2" style="font-size: 18px; padding-top: 10px">
+					Address(Line 2)</label> <input type="text" name="addr_line2" class="form-control" th:value="*{addr_line2}"/> 
+					<label for="city" style="font-size: 18px; padding-top: 10px">
+					City</label> <span style="color:red; font-size:12px;">*Required</span> <input type="text" name="city" class="form-control" th:value="*{city}"/> 
+					<label for="state" style="font-size: 18px; padding-top: 10px">
+					State</label> <span style="color:red; font-size:12px;">*Required</span> <input type="text" name="state" class="form-control" th:value="*{state}"/> 
+					<label for="zip" style="font-size: 18px; padding-top: 10px">
+					Zip</label> <span style="color:red; font-size:12px;">*Required</span> <input type="text" name="zip" class="form-control" th:value="*{zip}"/> 	
+					<br>
+					<input class="btn btn-primary" type="submit" value="Create" style="width:15%">			   		
+			</form>
+		</div>
+		</div>
+	</div>
+	</div>
+	<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

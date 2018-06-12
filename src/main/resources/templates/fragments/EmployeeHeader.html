@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:fragment="header">
+<head>
+<meta charset="UTF-8">
+<title>Delta Mutual Fund</title>
+<!-- Bootstrap core CSS -->
+    <link href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="../../static/css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+<!-- Font-Awesome CSS -->
+    <link href="../../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
+    <link href="../../static/css/font-awesome.css" th:href="@{/css/font-awesome.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row" th:style="'background:url(' + @{/img/bg.jpg} + ');height:160px;
+	background-position: center;background-size:cover;background-repeat:no-repeat;'" 
+	style="height:160px;background-image:url(../../static/img/bg.jpg);
+	background-position: center;background-size:cover;background-repeat:no-repeat;">
+		<div class="col-md-12">
+			<ul class="nav nav-pills" style="float:right;padding-top:112px">
+				<li class="active">
+					<form th:action="@{~/logout}" method="post">
+						<input class="btn" type="submit" value="Sign Off" />
+					</form>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+	<ul class="nav nav-tabs">
+	
+		  <li>
+		    <a href="/employees/CreateFund.html" th:href="@{~/employee/CreateFund}">
+		      Fund Management
+		    </a>
+		  </li>
+		  <li>
+		    <a href="/employees/TransitionDay.html" th:href="@{~/employee/TransitionDay}">
+		      Simulate Transition Day
+		    </a>
+		  </li>
+		  
+		  <li>
+		    <a href="/employees/DepositCheck.html" th:href="@{~/employee/DepositCheck}">
+		      Deposit Check
+		    </a>
+		  </li>
+		  <li class="dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" 
+		    href="#" role="button" aria-haspopup="true" aria-expanded="false">
+		      Manage Customer Account <span class="caret"></span>
+		    </a>
+    			<ul class="dropdown-menu" style="width:1250px">
+				<ul class="list-inline">
+	                   <li><a href="/employees/CreateCustomerAccount.html" th:href="@{~/employee/CreateCustomer}">Create Account</a>
+	                   </li>
+	                   <li><a href="/employees/ViewCustomer.html" th:href="@{~/employee/ViewCustomer}">View Account</a>
+	                   </li>
+	            </ul>
+			</ul>
+		  </li>
+		  <li class="dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" 
+		    href="#" role="button" aria-haspopup="true" aria-expanded="false">
+		      Manage Employee Account <span class="caret"></span>
+		    </a>
+			<ul class="dropdown-menu" style="width:860px">
+	                <ul class='list-inline'>
+	                    <li><a href="/employees/CreateEmployeeAccount.html" 
+	                    th:href="@{~/employee/CreateEmployee}">Create Account</a>
+	                   </li>
+	                   <li><a href="/employees/ViewEmployee.html" 
+	                   th:href="@{~/employee/ViewEmployee}">View Account</a>
+	                   </li>
+	                </ul>
+			</ul>
+		  </li>
+	</ul>
+</div>
+</body>
+</html>

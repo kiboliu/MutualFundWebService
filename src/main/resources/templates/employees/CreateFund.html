@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="~{fragments/EmployeeHeader :: header}"></div>
+	<div class="container-fluid" align=center>
+		<p style="margin-top:2%;font-size:20px" th:text="${fundModel.title}"></p>		
+		<div style="width:650px;background-color:white;border-top:solid;border-color:#117ACA;
+		margin-right: auto; margin-left: auto;">
+		
+		<p style="font-size:20px;color:red;" align=center th:text="${fundModel.successMsg}"></p> 
+			<p style="margin-top:2%;font-size:15px;">
+			*Required fields: fund name and fund ticker.
+			<br>
+			*Fund ticker must be a short one to five character only identifier.
+			</p>
+			<div th:each="error : ${fundModel.createFundErrorMsg}">
+		<p style="font-size:20px;color:red;" align=center th:text="${error}"></p>
+		</div>
+			<div class="form-group">
+				<form action="/employee/CreateFund" th:action="@{/employee/CreateFund}" method="POST" th:object="${fundModel.newFund}">
+				<input type="hidden" name="id" th:value="*{id}">
+				<span style="font-size:18px;padding-top:5%">Fund Name: </span>
+				<input type="text" name="name" th:value="*{name}">
+				<br>
+				<br>
+				<span style="font-size:18px;padding-top:5%">Fund Ticker: </span>
+				<input type="text" name="symbol" th:value="*{symbol}">
+				<br>
+				<br>
+				<input class="btn btn-primary" type="submit" value="Create" style="width:15%">
+				</form>
+			</div>
+			<p style="margin-top:2%;font-size:20px;">
+			Current List of Available Funds
+			</p>
+			<div class="table-responsive">
+			<table class="table table-bordered table-hover text-right">
+			<thead>
+				<tr style="background-color:rgb(72,83,93);color:white">
+					<th>Fund Name</th>
+					<th>Fund Ticker</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${fundModel.fundList.size()} eq 0">
+					<td colspan="2">No available funds.</td>
+				</tr>
+				<tr th:each="fund: ${fundModel.fundList}">
+					<td th:text="${fund.name}"></td>
+					<td th:text="${fund.symbol}"></td>
+				</tr>
+			</tbody>
+			</table>
+		  </div>
+		</div>
+	</div>
+	<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

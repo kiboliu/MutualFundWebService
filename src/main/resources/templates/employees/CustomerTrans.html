@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="~{fragments/EmployeeHeader :: header}"></div>
+	<div class="container-fluid" align=center>
+		<p style="margin-top: 2%; font-size: 20px"
+			th:text="${customerModel.title}"></p>
+		<div
+			style="width: 650px; background-color: white; border-top: solid; border-color: #117ACA; margin-right: auto; margin-left: auto;">
+
+
+				
+				<div class="table-responsive" th:object="${customerModel.curt}">
+				    <table class="table table-bordered table-hover text-right">
+					    <tr style="background-color: rgb(72, 83, 93); color: white" class="text-center">
+					        <th style="width: 30%"></th>
+					        <th style="width:70%">Details</th>
+					    </tr>
+					    <tr>
+					         <td>Full Name</td>
+					         <td th:text="*{firstname} +' '+ *{lastname}"></td>
+					    </tr>
+					    <tr>
+					        <td>Username</td>
+					        <td th:text="*{username}"></td>
+					    </tr>
+					    <tr>
+					        <td>Cash</td>
+					        <td th:text="'$ '+${#numbers.formatDecimal(customerModel.curt.cash, 1, 'COMMA', 2, 'POINT')}"></td>
+					    </tr>
+					    <tr>
+					        <td>Available Balance</td>
+					        <td th:text="'$ '+${#numbers.formatDecimal(customerModel.curt.availablebalance, 1, 'COMMA', 2, 'POINT')}"></td>
+					    </tr>
+					    <tr>
+					        <td>Address</td>
+					        <td th:text="*{addr_line1}+' '+*{addr_line2}"></td>
+					    </tr>
+					    <tr>
+					        <td>State</td>
+					        <td th:text="*{state}"></td>
+					    </tr>
+					    <tr>
+					        <td>Zip</td>
+					        <td th:text="*{zip}"></td>
+					    </tr>
+					
+					</table>
+			   </div>
+			<a type="button" th:href="@{'/employee/modify/'+${customerModel.curt.id}}">Reset Password</a>
+			<p style="margin-top: 2%; font-size: 20px;">View Current
+				Transaction History</p>
+			<div class="table-responsive">
+				<table class="table table-bordered table-hover text-right">
+					<tr style="background-color: rgb(72, 83, 93); color: white">
+						<th>Fund Name</th>
+						<th>Transaction Type</th>
+						<th>Amount</th>
+						<th>Shares</th>
+						<th>Execute Date</th>
+						<th>Status</th>
+
+					</tr>
+					<tr th:if="${customerModel.transList.size()} eq 0">
+						<td colspan="3">There is no transaction history right now!</td>
+					</tr>
+					<tr th:each="tran : ${customerModel.transList}">
+						<td th:text="*{tran.fund_name}">eBiz Education</td>
+						<td th:text="*{tran.transactiontype}"></td>
+						<td th:text="${tran.amount != 0.0} ? ${#numbers.formatDecimal(tran.amount, 1, 'COMMA', 2, 'POINT')}  : ' '"></td>
+						<td th:text="${tran.shares != 0.0} ? ${#numbers.formatDecimal(tran.shares, 1, 'COMMA', 3, 'POINT')}  : ' '"></td>
+						<td th:text="*{tran.exe_date}"></td>
+						<td th:text="*{tran.status}"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+<div th:fragment="footer" class="container:fluid" style="background-color:rgb(245,245,245)">
+	<br>
+	<div style="text-align:center">
+		<ul style="list-style:none">
+			<li><a href="#">Facebook Page</a> | <a href="#">Private Policy</a> | <a href="#">Google Search</a></li>
+			<li>© Copyright 2018. Delta Mutual Fund Inc. All Rights Reserved.</li>
+			<li><a href="#">Need Help? View our Contact Numbers and Hours of Operation</a></li>
+		</ul>
+	</div>
+	<br>
+	<br>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    	<!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"
+    th:src="@{http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js}"></script>
+    <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+</div>
+</body>
+</html>

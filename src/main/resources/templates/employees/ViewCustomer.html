@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="~{fragments/EmployeeHeader :: header}"></div>
+	<div class="container-fluid" align=center>
+		<br>
+		<p style="margin-top:2%;font-size:20px;display:inline;" th:text="${employeeModel.title}"></p>
+		<a style="float:right" href="/employees/CreateCustomerAccount.html" 
+		th:href="@{~/employee/CreateCustomer}">Create Customer Accounts</a>
+		<!-- th:href="@{~/employee/CreateCustomerAccount}">Create Customer Accounts</a> -->
+		<br>
+		<br>
+		<div style="width:100%;background-color:white;border-top:solid;border-color:#117ACA;
+		margin-right: auto; margin-left: auto;">
+			<br>
+			<div class="table-responsive">
+			<table class="table table-bordered table-hover text-right">
+			<thead>			
+				<tr style="background-color:rgb(72,83,93);color:white" class="text-center">
+					<th>User Name</th>
+					<th>Password</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Address (Line 1)</th>
+					<th>Address (Line 2)</th>
+					<th>City</th>
+					<th>State</th>
+					<th>Zip</th>
+					<th>Cash</th>
+					<th>Available Balance</th>
+					<th>Edit Password</th>
+					<th>View Transactions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${employeeModel.CustomerList.size()} eq 0">
+					<td colspan="2">No customers.</td>
+				</tr>
+				<tr th:each="customer: ${employeeModel.CustomerList}">
+					<td th:text="${customer.username}"></td>
+					<!-- <td th:text="${customer.password}"></td> -->
+					<td th:text="······"></td>
+					<td th:text="${customer.firstname}"></td>
+					<td th:text="${customer.lastname}"></td>		
+					<td th:text="${customer.addr_line1}"></td>
+					<td th:text="${customer.addr_line2}"></td>
+					<td th:text="${customer.city}"></td>
+					<td th:text="${customer.state}"></td>
+					<td th:text="${customer.zip}"></td>	
+					<!-- <td th:text="${customer.cash}"></td>
+					<td th:text="${customer.availablebalance}"></td> -->
+					<td th:text="${#numbers.formatDecimal(customer.cash, 1, 'COMMA', 2, 'POINT')}"></td>
+					<td th:text="${#numbers.formatDecimal(customer.availablebalance, 1, 'COMMA', 2, 'POINT')}"></td>
+					<td>
+					<a href="/employees/ModifyCustomerAccount.html" 
+					th:href="@{'~/employee/modify/'+${customer.id}}">Edit Password</a>
+					</td>
+					<td>
+					<a href="/employees/CustomerTrans.html" 
+					th:href="@{'/employee/CustomerAccounts/'+${customer.id}}">View Transactions</a>
+					</td> 
+				</tr>			
+			</tbody>
+			</table>
+		  </div>
+		</div>
+	</div>
+	<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

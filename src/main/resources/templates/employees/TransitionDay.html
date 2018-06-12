@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en-150">
+<head>
+	<meta charset="UTF-8">
+	<script src="../../static/js/cleave.min.js" th:src="@{/js/cleave.min.js}"></script>
+	<!--<script type="text/javascript">-->
+		<!--$(document).on("change",".inputformat", function () {-->
+            <!--$(".inputformat").val(parseFloat($(".inputformat").val()).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));-->
+        <!--});-->
+	<!--</script>-->
+</head>
+<body>
+	<div th:replace="~{fragments/EmployeeHeader :: header}"></div>
+	<form th:action="@{~/employee/TransitionDay}" method="post" th:object="${wrapper}">
+	<div class="container-fluid" align=center>
+		<p style="margin-top:2%;font-size:20px">Set Transition Day</p>
+		<div style="width:650px;background-color:white;border-top:solid;border-color:#117ACA;
+		margin-right: auto; margin-left: auto;">
+		<br>
+		<span style="font-size:18px;padding-top:5%">Previous Transition Date: 
+		<span style="font-size:18px;padding-top:5%" id="previousdate" name="previousdate" th:value="${previousDate}" th:text="${previousDate}">
+		</span></span>&nbsp;
+		<span style="font-size:18px;padding-top:5%">Set Transition Date: </span>
+		<input type="date" name="exe_date">
+		<br>
+			<span th:each="err : ${error}">
+				<p style="color:red" th:text="${err}"></p>
+			</span>
+		<div class="table-responsive" style="margin-top:10px;">
+			<table class="table table-bordered table-hover">
+				<tr style="background-color:rgb(72,83,93);color:white">
+					<th>Fund Name</th>
+					<th>Fund Ticker</th>
+					<th>Previous Closing Price</th>
+					<th>New Closing Price</th>
+				</tr>
+				<tr th:each="fund,stat : ${wrapper.priceList}">
+					<td th:text="${fund.getName()}" th:field="*{priceList[__${stat.index}__].name}"></td>
+					<td th:text="${fund.getSymbol()}" th:field="*{priceList[__${stat.index}__].symbol}"></td>
+					<td th:text="${fund.getLastprice() < 0.01} ? ' ' : ${#numbers.formatDecimal(fund.getLastprice(), 1, 'COMMA', 2, 'POINT')}" th:field="*{priceList[__${stat.index}__].lastprice}"></td>
+					<td><span class="dollar">$&nbsp;<input class="input-numeral" th:name="|priceList[${stat.index}].price|"
+					th:field="*{priceList[__${stat.index}__].price}" th:value="${fund.getPrice()}" type="text" /></span>
+					</td>
+				</tr>
+				<tr>
+					* New price should be within 0.01 ~ 10000<br/>* New price should not be higher or lower by 20% than the previous price
+				</tr>
+			</table>
+		  </div>
+		  <input class="btn btn-primary" type="submit" value="Submit" style="width:15%;margin-bottom:10px;">
+		</div>
+	</div>
+	</form>
+	<script th:inline="javascript">
+		$('.input-numeral').toArray().forEach(function (value) {
+            new Cleave(value, {
+                numeral: true,
+                numeralThousandsGroupStyle: 'thousand'
+            });
+        });
+	</script>
+	<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="~{fragments/EmployeeHeader :: header}"></div>
+	<div class="container">
+		<p style="margin-top:2%; font-size:20px; " align=center th:text="${employeeModel.title}"></p>
+		<div style="width:750px;background-color:white;border-top:solid;border-color:#117ACA;
+		margin-right: auto; margin-left: auto;">
+		<br>
+		<div th:each="error : ${employeeModel.errorMsg}">
+		<p style="font-size:20px;color:red;" align=center th:text="${error}"></p>
+		</div> 
+		<div class="createaccount"
+		style="width: 80%; margin-left: auto; margin-right: auto; align:center;">
+		<div class="form-group">
+			<form action="/employee/CreateEmployee" th:action="@{/employee/CreateEmployee}" method="post" 
+			th:object="${employeeModel.newEmployee}">					
+				<label for="username" style="font-size: 18px; padding-top: 10px">
+				User Name</label> <span style="color:red; font-size:12px;">*Required</span> <input type="text" name="username" 
+				class="form-control" th:value="*{username}"/> <br>
+				<label for="firstname" style="font-size: 18px; padding-top: 10px">
+				First Name</label> <span style="color:red; font-size:12px;">*Required</span> <input type="text" 
+				th:value="*{firstname}" name="firstname" class="form-control"/> <br>
+				<label for="lastname" style="font-size: 18px; padding-top: 10px">
+				Last Name</label> <span style="color:red; font-size:12px;">*Required</span> <input type="text" name="lastname" 
+				class="form-control" th:value="*{lastname}"/> <br>
+				<label for="password" style="font-size: 18px; padding-top: 10px">
+				Password</label> <span style="color:red; font-size:12px;">*Required</span> <input type="password" name="password" 
+				class="form-control" th:value="*{password}"/> <br> 
+				<input class="btn btn-primary" type="submit" value="Create" style="width:15%">		
+			</form>
+		</div>
+		</div>
+	</div>
+	</div>
+	<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
